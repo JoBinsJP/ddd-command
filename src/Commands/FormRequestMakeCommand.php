@@ -4,21 +4,21 @@ namespace Aammui\DDD\Commands;
 
 use Illuminate\Console\Command;
 
-class ControllerMakeCommand extends Command
+class FormRequestMakeCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'ddd:controller {controller} {d} {--r}';
+    protected $signature = 'ddd:request {request} {d}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a Controller class in a DDD architecture.';
+    protected $description = 'Create a FormRequest class in a DDD architecture.';
 
     /**
      * Create a new command instance.
@@ -33,10 +33,10 @@ class ControllerMakeCommand extends Command
 
     public function handle()
     {
-        $controller = $this->argument('controller');
+        $class = $this->argument('request');
         $domain = $this->argument('d');
-        $namespace = config('ddd.application') . '\\' . ucfirst($domain) . '\\Controllers';
-        $this->exportBackend($namespace, ucfirst($controller));
+        $namespace = config('ddd.application') . '\\' . ucfirst($domain) . '\\Requests';
+        $this->exportBackend($namespace, ucfirst($class));
     }
 
     /**

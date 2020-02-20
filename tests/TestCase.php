@@ -24,7 +24,6 @@ class TestCase extends BaseTestCase
             'prefix'   => '',
         ]);
     }
-
     /**
      * @param \Illuminate\Foundation\Application $app
      *

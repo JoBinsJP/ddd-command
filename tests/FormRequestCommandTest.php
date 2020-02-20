@@ -4,7 +4,7 @@ namespace Aammui\DDD\Tests;
 
 use Illuminate\Support\Facades\Artisan;
 
-class ControllerCommandTest extends TestCase
+class FormRequestCommandTest extends TestCase
 {
     public function setUp(): void
     {
@@ -16,9 +16,9 @@ class ControllerCommandTest extends TestCase
     /** @test */
     public function ddd_create_controller_command()
     {
-        Artisan::call('ddd:controller UserController auth');
+        Artisan::call('ddd:request UserCreateRequest auth');
         $output = Artisan::output();
-        $file = __DIR__ . '/../app/Application/Auth/Controllers/UserController.php';
+        $file = __DIR__ . '/../app/Application/Auth/Requests/UserCreateRequest.php';
         $this->assertTrue(file_exists($file));
     }
 }
