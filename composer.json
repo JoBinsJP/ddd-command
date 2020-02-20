@@ -1,0 +1,35 @@
+{
+    "name": "aammui/ddd",
+    "description": "Domain Driven Architecture Generator Tool for Laravel.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bedram Tamang",
+            "email": "tmgbedu@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aammui\\DDD\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Aammui\\DDD\\Tests\\": "tests"
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Aammui\\DDD\\DDDServiceProvider"
+            ]
+        }
+    }
+}
