@@ -28,3 +28,7 @@ php artisan ddd:controller LoginController auth
 ```
 php artisan ddd:request LoginRequest auth
 ```
+#### Create a model
+```
+php artisan ddd:model User auth
+```

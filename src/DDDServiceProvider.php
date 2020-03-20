@@ -4,6 +4,7 @@ namespace Aammui\DDD;
 
 use Aammui\DDD\Commands\ControllerMakeCommand;
 use Aammui\DDD\Commands\FormRequestMakeCommand;
+use Aammui\DDD\Commands\ModelMakeCommand;
 use Illuminate\Support\ServiceProvider;
 
 class DDDServiceProvider extends ServiceProvider
@@ -30,7 +31,8 @@ class DDDServiceProvider extends ServiceProvider
     {
         $this->commands([
             ControllerMakeCommand::class,
-            FormRequestMakeCommand::class
+            FormRequestMakeCommand::class,
+            ModelMakeCommand::class
         ]);
     }
 }
