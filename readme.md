@@ -24,6 +24,14 @@ Here we created ```front.php``` file for new **ddd** routes, and setup and loade
 ```
 php artisan ddd:controller LoginController auth
 ```
+Above Controller can call from ```front.php``` as follows.
+```php
+<?php
+
+Route::group(['namespace'=>'Domain\Auth'],function(){
+    Route::get('login','LoginController@method');
+});
+```
 ##### Create a FormRequest
 Following command creates a Laravel's FomRequest Class in the application domain. i.e. in the ```app\Application\Auth\Requests\``` directory. FormRequest is part of application layer rather than core business layer so it is supposed to be stored in the application directory.
 ```
