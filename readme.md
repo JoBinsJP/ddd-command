@@ -25,10 +25,23 @@ Here we created ```front.php``` file for new **ddd** routes, and setup and loade
 php artisan ddd:controller LoginController auth
 ```
 ##### Create a FormRequest
+Following command creates a Laravel's FomRequest Class in the application domain. i.e. in the ```app\Application\Auth\Requests\``` directory. FormRequest is part of application layer rather than core business layer so it is supposed to be stored in the application directory.
 ```
 php artisan ddd:request LoginRequest auth
 ```
 #### Create a model
+Below commands create a Transaction model into the Account domain. The Transaction models lies on ```app\Domain\Account\Models\Transaction.php``` file. Domain model is part of core buiness layer so it is supposed to be stored in the domain directory. 
 ```
-php artisan ddd:model User auth
+ddd:model Transaction Account
 ```
+#### Domain Vs Application 
+| Application | Domain | Description |
+| ----------- | :------: | ------|
+| FormRequest |         | |
+| Rules       |         | |
+| ResponseClass |         | Have a look on this articles. [Versatile Respoonse](https://timacdonald.me/versatile-response-objects-laravel/) |
+| Controllers |         | |
+|             | Models  | |
+|             | Jobs    | |
+|             | Actions | |
+
