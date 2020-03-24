@@ -12,6 +12,7 @@
     <testsuites>
         <testsuite name="Permissions Test Suite">
             <directory>tests</directory>
+            <exclude>./tests/Feature</exclude>
         </testsuite>
     </testsuites>
     <filter>
