@@ -1,5 +1,6 @@
 <?php
 return [
     'application' => 'App\Application',
-    'domain' => 'App\Domain'
+    'domain' => 'App\Domain',
+    'tests' => 'Tests\Feature'
 ];

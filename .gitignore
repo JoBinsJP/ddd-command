@@ -1,3 +1,4 @@
 /app
 /vendor
+/tests/Feature/*
 composer.lock
