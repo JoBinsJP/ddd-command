@@ -37,6 +37,7 @@ class ControllerMakeCommand extends Command
         $domain = $this->argument('d');
         $namespace = config('ddd.application') . '\\' . ucfirst($domain) . '\\Controllers';
         $this->exportBackend($namespace, ucfirst($controller));
+        $this->info("Controller created successfully.");
     }
 
     /**
