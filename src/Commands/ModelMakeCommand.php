@@ -37,6 +37,7 @@ class ModelMakeCommand extends Command
         $domain = $this->argument('d');
         $namespace = config('ddd.domain') . '\\' . ucfirst($domain) . '\\Models';
         $this->exportBackend($namespace, ucfirst($controller));
+        $this->info("Model created successfully.");
     }
 
     /**
