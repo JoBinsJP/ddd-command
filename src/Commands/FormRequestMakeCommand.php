@@ -9,7 +9,7 @@ class FormRequestMakeCommand extends Command
 {
     use StubCompilerTrait;
 
-    const STUB_PATH =    __DIR__ . '/../stubs/request.stub';
+    const STUB_PATH = __DIR__ . '/../stubs/request.stub';
 
     /**
      * The name and signature of the console command.
@@ -49,10 +49,9 @@ class FormRequestMakeCommand extends Command
     /**
      * Get stub path.
      * 
-     * @param bool $isResource 
      * @return string 
      */
-    public function getStubPath($isResource = false)
+    public function getStubPath()
     {
         return self::STUB_PATH;
     }

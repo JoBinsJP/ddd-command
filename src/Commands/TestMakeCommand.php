@@ -10,13 +10,14 @@ class TestMakeCommand extends Command
     use StubCompilerTrait;
 
     const STUB_PATH = __DIR__ . '/../stubs/test.stub';
+    const STUB_UNIT_PATH = __DIR__ . '/../stubs/test.unit.stub';
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'ddd:test {test} {d}';
+    protected $signature = 'ddd:test {test} {d} {--U|unit}';
 
     /**
      * The console command description.
@@ -40,19 +41,36 @@ class TestMakeCommand extends Command
     {
         $class = $this->argument('test');
         $domain = $this->argument('d');
-        $namespace = config('ddd.tests') . '\\' . ucfirst($domain);
-        $this->exportBackend($namespace, ucfirst($class), $this->getStubPath());
+        $isUnit = $this->option('unit');
+        $this->exportBackend($this->getNamespace($domain, $isUnit), ucfirst($class), $this->getStubPath($isUnit));
         $this->info("Test created successfully.");
+    }
+
+    /**
+     * Get namespace based on is unit.
+     * 
+     * @param mixed $domain 
+     * @param mixed $isUnit 
+     * @return string 
+     */
+    public function getNamespace($domain, $isUnit)
+    {
+        if ($isUnit) {
+            return 'Tests\Unit' . '\\' . ucfirst($domain);
+        }
+        return 'Tests\Feature' . '\\' . ucfirst($domain);
     }
 
     /**
      * Get stub path based on commands.
      * 
-     * @param bool $isResource 
      * @return string 
      */
-    public function getStubPath($isResource = false)
+    public function getStubPath($isUnit = false)
     {
+        if ($isUnit) {
+            return self::STUB_UNIT_PATH;
+        }
         return self::STUB_PATH;
     }
 }

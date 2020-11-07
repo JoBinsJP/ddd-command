@@ -48,10 +48,9 @@ class ModelMakeCommand extends Command
     /**
      * Get stub path.
      * 
-     * @param bool $isResource 
      * @return string 
      */
-    public function getStubPath($isResource = false)
+    public function getStubPath()
     {
         return self::STUB_PATH;
     }
