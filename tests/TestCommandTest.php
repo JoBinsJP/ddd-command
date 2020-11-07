@@ -16,9 +16,18 @@ class TestCommandTest extends BaseTestCase
     }
 
     /** @test */
-    public function ddd_create_controller_command()
+    public function ddd_create_test_command()
     {
         Artisan::call('ddd:test LoginTest auth');
+        $output = Artisan::output();
+        $file = __DIR__ . '/../tests/Feature/Auth/LoginTest.php';
+        $this->assertTrue(file_exists($file));
+    }
+
+    /** @test */
+    public function ddd_create_unit_test_command()
+    {
+        Artisan::call('ddd:test LoginTest auth --unit');
         $output = Artisan::output();
         $file = __DIR__ . '/../tests/Feature/Auth/LoginTest.php';
         $this->assertTrue(file_exists($file));

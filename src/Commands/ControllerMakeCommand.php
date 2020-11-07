@@ -2,16 +2,22 @@
 
 namespace Aammui\DDD\Commands;
 
+use Aammui\DDD\Traits\StubCompilerTrait;
 use Illuminate\Console\Command;
 
 class ControllerMakeCommand extends Command
 {
+    use StubCompilerTrait;
+
+    const STUB_PATH = __DIR__ . '/../stubs/controller.stub';
+    const RESOURCE_STUB_PATH = __DIR__ . '/../stubs/controller.resource.stub';
+
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'ddd:controller {controller} {d} {--r}';
+    protected $signature = 'ddd:controller {controller} {d} {--r|resource}';
 
     /**
      * The console command description.
@@ -35,59 +41,23 @@ class ControllerMakeCommand extends Command
     {
         $controller = $this->argument('controller');
         $domain = $this->argument('d');
+        $isResource = $this->option('resource');
         $namespace = config('ddd.application') . '\\' . ucfirst($domain) . '\\Controllers';
-        $this->exportBackend($namespace, ucfirst($controller));
+        $this->exportBackend($namespace, ucfirst($controller), $this->getStubPath($isResource));
         $this->info("Controller created successfully.");
     }
 
     /**
-     * Create the directories for the files.
-     *
-     * @return void
+     * Get stub path based on commands.
+     * 
+     * @param bool $isResource 
+     * @return string 
      */
-    protected function ensureDirectoriesExist($directory)
+    public function getStubPath($isResource = false)
     {
-        if (!is_dir($directory)) {
-            mkdir($directory, 0755, true);
+        if ($isResource) {
+            return self::RESOURCE_STUB_PATH;
         }
-    }
-
-    public function ensureFileExist($file)
-    {
-        if (!file_exists($file)) {
-            $file = fopen($file, "w");
-            fclose($file);
-        }
-    }
-
-
-    /**
-     * Export the authentication backend.
-     *
-     * @return void
-     */
-    protected function exportBackend($namespace, $class)
-    {
-        $directory = lcfirst(str_replace('\\', '/', $namespace));
-        $file =  $directory . '/' . $class . '.php';
-        $this->ensureDirectoriesExist($directory);
-        $this->ensureFileExist($file);
-
-        $data = $this->compileControllerStub($namespace, $class);
-        file_put_contents($file, $data);
-    }
-
-    /**
-     *
-     * @return string
-     */
-    protected function compileControllerStub($namespace, $class)
-    {
-        $data =  str_replace(
-            '{{namespace}}',
-            $namespace,
-            file_get_contents(__DIR__ . '/../stubs/controller.stub')
-        );
-        return str_replace('{{class}}', $class, $data);
+        return self::STUB_PATH;
     }
 }

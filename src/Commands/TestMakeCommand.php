@@ -2,23 +2,22 @@
 
 namespace Aammui\DDD\Commands;
 
+use Aammui\DDD\Traits\StubCompilerTrait;
 use Illuminate\Console\Command;
 
 class TestMakeCommand extends Command
 {
+    use StubCompilerTrait;
+
+    const STUB_PATH = __DIR__ . '/../stubs/test.stub';
+    const STUB_UNIT_PATH = __DIR__ . '/../stubs/test.unit.stub';
+
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'ddd:test {test} {d}';
-
-    /**
-     * Stubs that will publish 
-     *
-     * @var string
-     */
-    protected $stub = __DIR__ . '/../stubs/test.stub';
+    protected $signature = 'ddd:test {test} {d} {--U|unit}';
 
     /**
      * The console command description.
@@ -42,58 +41,36 @@ class TestMakeCommand extends Command
     {
         $class = $this->argument('test');
         $domain = $this->argument('d');
-        $namespace = config('ddd.tests') . '\\' . ucfirst($domain);
-        $this->exportBackend($namespace, ucfirst($class));
+        $isUnit = $this->option('unit');
+        $this->exportBackend($this->getNamespace($domain, $isUnit), ucfirst($class), $this->getStubPath($isUnit));
+        $this->info("Test created successfully.");
     }
 
     /**
-     * Create the directories for the files.
-     *
-     * @return void
+     * Get namespace based on is unit.
+     * 
+     * @param mixed $domain 
+     * @param mixed $isUnit 
+     * @return string 
      */
-    protected function ensureDirectoriesExist($directory)
+    public function getNamespace($domain, $isUnit)
     {
-        if (!is_dir($directory)) {
-            mkdir($directory, 0755, true);
+        if ($isUnit) {
+            return 'Tests\Unit' . '\\' . ucfirst($domain);
         }
+        return 'Tests\Feature' . '\\' . ucfirst($domain);
     }
 
-    public function ensureFileExist($file)
+    /**
+     * Get stub path based on commands.
+     * 
+     * @return string 
+     */
+    public function getStubPath($isUnit = false)
     {
-        if (!file_exists($file)) {
-            $file = fopen($file, "w");
-            fclose($file);
+        if ($isUnit) {
+            return self::STUB_UNIT_PATH;
         }
-    }
-
-
-    /**
-     * Export the authentication backend.
-     *
-     * @return void
-     */
-    protected function exportBackend($namespace, $class)
-    {
-        $directory = lcfirst(str_replace('\\', '/', $namespace));
-        $file =  $directory . '/' . $class . '.php';
-        $this->ensureDirectoriesExist($directory);
-        $this->ensureFileExist($file);
-
-        $data = $this->compileControllerStub($namespace, $class);
-        file_put_contents($file, $data);
-    }
-
-    /**
-     *
-     * @return string
-     */
-    protected function compileControllerStub($namespace, $class)
-    {
-        $data =  str_replace(
-            '{{namespace}}',
-            $namespace,
-            file_get_contents($this->stub)
-        );
-        return str_replace('{{class}}', $class, $data);
+        return self::STUB_PATH;
     }
 }
