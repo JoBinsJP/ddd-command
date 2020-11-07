@@ -21,4 +21,13 @@ class ControllerCommandTest extends TestCase
         $file = __DIR__ . '/../app/Application/Auth/Controllers/UserController.php';
         $this->assertTrue(file_exists($file));
     }
+
+    /** @test */
+    public function ddd_create_resource_controller_command()
+    {
+        Artisan::call('ddd:controller UserController auth --resource');
+        $output = Artisan::output();
+        $file = __DIR__ . '/../app/Application/Auth/Controllers/UserController.php';
+        $this->assertTrue(file_exists($file));
+    }
 }

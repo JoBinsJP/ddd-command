@@ -2,10 +2,15 @@
 
 namespace Aammui\DDD\Commands;
 
+use Aammui\DDD\Traits\StubCompilerTrait;
 use Illuminate\Console\Command;
 
 class FormRequestMakeCommand extends Command
 {
+    use StubCompilerTrait;
+
+    const STUB_PATH =    __DIR__ . '/../stubs/request.stub';
+
     /**
      * The name and signature of the console command.
      *
@@ -36,58 +41,19 @@ class FormRequestMakeCommand extends Command
         $class = $this->argument('request');
         $domain = $this->argument('d');
         $namespace = config('ddd.application') . '\\' . ucfirst($domain) . '\\Requests';
-        $this->exportBackend($namespace, ucfirst($class));
+        $this->exportBackend($namespace, ucfirst($class), $this->getStubPath());
         $this->info("Form request created successfully.");
     }
 
-    /**
-     * Create the directories for the files.
-     *
-     * @return void
-     */
-    protected function ensureDirectoriesExist($directory)
-    {
-        if (!is_dir($directory)) {
-            mkdir($directory, 0755, true);
-        }
-    }
-
-    public function ensureFileExist($file)
-    {
-        if (!file_exists($file)) {
-            $file = fopen($file, "w");
-            fclose($file);
-        }
-    }
-
 
     /**
-     * Export the authentication backend.
-     *
-     * @return void
+     * Get stub path.
+     * 
+     * @param bool $isResource 
+     * @return string 
      */
-    protected function exportBackend($namespace, $class)
+    public function getStubPath($isResource = false)
     {
-        $directory = lcfirst(str_replace('\\', '/', $namespace));
-        $file =  $directory . '/' . $class . '.php';
-        $this->ensureDirectoriesExist($directory);
-        $this->ensureFileExist($file);
-
-        $data = $this->compileControllerStub($namespace, $class);
-        file_put_contents($file, $data);
-    }
-
-    /**
-     *
-     * @return string
-     */
-    protected function compileControllerStub($namespace, $class)
-    {
-        $data =  str_replace(
-            '{{namespace}}',
-            $namespace,
-            file_get_contents(__DIR__ . '/../stubs/request.stub')
-        );
-        return str_replace('{{class}}', $class, $data);
+        return self::STUB_PATH;
     }
 }
