@@ -1,4 +1,5 @@
 /app
 /vendor
 /tests/Feature/*
+/tests/Unit/*
 composer.lock
