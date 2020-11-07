@@ -40,7 +40,7 @@ php artisan ddd:request LoginRequest auth
 #### Create a model
 Below commands create a Transaction model into the Account domain. The Transaction models lies on ```app\Domain\Account\Models\Transaction.php``` file. Domain model is part of core buiness layer so it is supposed to be stored in the domain directory. 
 ```
-ddd:model Transaction Account
+php artisan ddd:model Transaction Account
 ```
 #### Domain Vs Application 
 | Application | Domain | Description |
