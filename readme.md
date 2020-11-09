@@ -53,3 +53,8 @@ php artisan ddd:model Transaction Account
 |             | Jobs    | |
 |             | Actions | |
 
+#### Summary Of Available Commands
+| Command | Description |
+| ------- | ------- |
+| php artisan ddd:request UserStoreRequest admin | Creates FormRequest named ```UserStoreRequest``` in namespace ```App\Application\Admin\Requests``` |
+| php artisan ddd:controller UsersController admin | Creates Controller named ```UsersController``` in namespace ```App\Application\Admin\Controllers```|
