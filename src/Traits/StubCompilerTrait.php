@@ -11,14 +11,14 @@ trait StubCompilerTrait
      */
     protected function ensureDirectoriesExist($directory)
     {
-        if (!is_dir($directory)) {
+        if ( !is_dir($directory) ) {
             mkdir($directory, 0755, true);
         }
     }
 
     public function ensureFileExist($file)
     {
-        if (!file_exists($file)) {
+        if ( !file_exists($file) ) {
             $file = fopen($file, "w");
             fclose($file);
         }
@@ -33,7 +33,7 @@ trait StubCompilerTrait
     protected function exportBackend($namespace, $class, $stubPath)
     {
         $directory = lcfirst(str_replace('\\', '/', $namespace));
-        $file =  $directory . '/' . $class . '.php';
+        $file      = base_path($directory.'/'.$class.'.php');
         $this->ensureDirectoriesExist($directory);
         $this->ensureFileExist($file);
 
@@ -47,11 +47,8 @@ trait StubCompilerTrait
      */
     protected function compileStub($namespace, $class, $stubPath)
     {
-        $data =  str_replace(
-            '{{namespace}}',
-            $namespace,
-            file_get_contents($stubPath)
-        );
+        $data = str_replace('{{namespace}}', $namespace, file_get_contents($stubPath));
+
         return str_replace('{{class}}', $class, $data);
     }
 }

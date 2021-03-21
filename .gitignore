@@ -3,3 +3,7 @@
 /tests/Feature/*
 /tests/Unit/*
 composer.lock
+
+.phpunit.result.cache
+.idea
+tests/app

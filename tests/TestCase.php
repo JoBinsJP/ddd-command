@@ -11,11 +11,14 @@ class TestCase extends BaseTestCase
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param \Illuminate\Foundation\Application $app
+     *
      * @return void
      */
     protected function getEnvironmentSetUp($app)
     {
+        $app->setBasePath(__DIR__.'/..');
+
         // Setup default database to use sqlite :memory:
         $app['config']->set('database.default', 'testbench');
         $app['config']->set('database.connections.testbench', [
@@ -24,6 +27,7 @@ class TestCase extends BaseTestCase
             'prefix'   => '',
         ]);
     }
+
     /**
      * @param \Illuminate\Foundation\Application $app
      *
@@ -32,7 +36,7 @@ class TestCase extends BaseTestCase
     protected function getPackageProviders($app)
     {
         return [
-            DDDServiceProvider::class
+            DDDServiceProvider::class,
         ];
     }
 }
