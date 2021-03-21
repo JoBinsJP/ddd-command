@@ -9,21 +9,22 @@
         }
     ],
     "require": {
-        "php": "^7.2"
+        "php": "^7.2|^8.0"
     },
     "autoload": {
         "psr-4": {
-            "Aammui\\DDD\\": "src"
+            "App\\": "app/",
+            "Aammui\\DDD\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Aammui\\DDD\\Tests\\": "tests"
+            "Aammui\\DDD\\Tests\\": "tests/"
         }
     },
     "require-dev": {
-        "orchestra/testbench": "^4.0",
-        "phpunit/phpunit": "^9.0"
+        "orchestra/testbench": "^4.0|^5.0|^6.0",
+        "phpunit/phpunit": "^8.0|^9.0"
     },
     "extra": {
         "laravel": {
