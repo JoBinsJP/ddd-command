@@ -1,11 +1,11 @@
 {
-    "name": "aammui/ddd",
-    "description": "Domain Driven Architecture Generator Tool for Laravel.",
+    "name": "jobins/ddd-command",
+    "description": "Domain Driven Architecture Generator cli for Laravel.",
     "license": "MIT",
     "authors": [
         {
             "name": "Bedram Tamang",
-            "email": "tmgbedu@gmail.com"
+            "email": "bedram@jobins.jp"
         }
     ],
     "require": {
@@ -14,12 +14,12 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Aammui\\DDD\\": "src/"
+            "Jobins\\DDDCommand\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Aammui\\DDD\\Tests\\": "tests/"
+            "Jobins\\DDDCommand\\Tests\\": "tests/"
         }
     },
     "require-dev": {
@@ -29,7 +29,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Aammui\\DDD\\DDDServiceProvider"
+                "Jobins\\DDDCommand\\DDDServiceProvider"
             ]
         }
     }

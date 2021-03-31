@@ -1,10 +1,10 @@
 <?php
 
-namespace Aammui\DDD\Contracts;
+namespace Jobins\DDDCommand\Contracts;
 
 /**
  * Interface DomainCommand
- * @package Aammui\DDD\Contracts
+ * @package Jobins\DDDCommand\Contracts
  */
 interface DomainCommand
 {
