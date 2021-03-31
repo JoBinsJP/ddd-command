@@ -1,13 +1,13 @@
 <?php
 
-namespace Aammui\DDD\Tests;
+namespace Jobins\DDDCommand\Tests;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
 /**
  * Class ControllerCommandTest
- * @package Aammui\DDD\Tests
+ * @package Jobins\DDDCommand\Tests
  */
 class ControllerCommandTest extends TestCase
 {
@@ -17,6 +17,11 @@ class ControllerCommandTest extends TestCase
 
         $this->withoutExceptionHandling();
 
+        File::deleteDirectory(base_path("app"));
+    }
+
+    public function tearDown(): void
+    {
         File::deleteDirectory(base_path("app"));
     }
 
@@ -46,10 +51,5 @@ class ControllerCommandTest extends TestCase
         $output = Artisan::output();
         $file   = __DIR__.'/../app/Application/Auth/Controllers/UserController.php';
         $this->assertTrue(file_exists($file));
-    }
-
-    public function tearDown(): void
-    {
-//        File::deleteDirectory(base_path("app"));
     }
 }

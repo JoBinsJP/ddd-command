@@ -1,11 +1,15 @@
 <?php
 
-namespace Aammui\DDD\Tests;
+namespace Jobins\DDDCommand\Tests;
 
-use Illuminate\Foundation\Testing\TestCase;
 use Illuminate\Support\Facades\Artisan;
-use Aammui\DDD\Tests\TestCase as BaseTestCase;
+use Illuminate\Support\Facades\File;
+use Jobins\DDDCommand\Tests\TestCase as BaseTestCase;
 
+/**
+ * Class TestCommandTest
+ * @package Jobins\DDDCommand\Tests
+ */
 class TestCommandTest extends BaseTestCase
 {
     public function setUp(): void
@@ -13,6 +17,12 @@ class TestCommandTest extends BaseTestCase
         parent::setUp();
 
         $this->withoutExceptionHandling();
+    }
+
+    public function tearDown(): void
+    {
+        File::deleteDirectory(base_path("tests/Feature"));
+        File::deleteDirectory(base_path("tests/Unit"));
     }
 
     /** @test */
@@ -29,7 +39,7 @@ class TestCommandTest extends BaseTestCase
     {
         Artisan::call('ddd:test LoginTest auth --unit');
         $output = Artisan::output();
-        $file   = __DIR__.'/../tests/Feature/Auth/LoginTest.php';
+        $file   = __DIR__.'/../tests/Unit/Auth/LoginTest.php';
         $this->assertTrue(file_exists($file));
     }
 }

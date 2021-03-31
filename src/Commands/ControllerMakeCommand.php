@@ -1,20 +1,17 @@
 <?php
 
-namespace Aammui\DDD\Commands;
+namespace Jobins\DDDCommand\Commands;
 
-use Aammui\DDD\Contracts\DomainCommand;
-use Aammui\DDD\Traits\DomainCommand as DomainCommandTrait;
 use Illuminate\Routing\Console\ControllerMakeCommand as BaseControllerMakeCommandAlias;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
+use Jobins\DDDCommand\Contracts\DomainCommand;
+use Jobins\DDDCommand\Traits\DomainCommand as DomainCommandTrait;
 
 /**
  * Class ControllerMakeCommand
- * @package Aammui\DDD\Commands
+ * @package Jobins\DDDCommand\Commands
  */
 class ControllerMakeCommand extends BaseControllerMakeCommandAlias implements DomainCommand
 {
-
     use DomainCommandTrait;
 
     /**

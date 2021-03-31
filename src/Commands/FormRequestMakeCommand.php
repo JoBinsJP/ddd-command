@@ -1,15 +1,19 @@
 <?php
 
-namespace Aammui\DDD\Commands;
+namespace Jobins\DDDCommand\Commands;
 
-use Aammui\DDD\Traits\StubCompilerTrait;
 use Illuminate\Console\Command;
+use Jobins\DDDCommand\Traits\StubCompilerTrait;
 
+/**
+ * Class FormRequestMakeCommand
+ * @package Jobins\DDDCommand\Commands
+ */
 class FormRequestMakeCommand extends Command
 {
     use StubCompilerTrait;
 
-    const STUB_PATH = __DIR__ . '/../stubs/request.stub';
+    public const STUB_PATH = __DIR__.'/../stubs/request.stub';
 
     /**
      * The name and signature of the console command.
@@ -35,21 +39,19 @@ class FormRequestMakeCommand extends Command
         parent::__construct();
     }
 
-
     public function handle()
     {
-        $class = $this->argument('request');
-        $domain = $this->argument('d');
-        $namespace = config('ddd.application') . '\\' . ucfirst($domain) . '\\Requests';
+        $class     = $this->argument('request');
+        $domain    = $this->argument('d');
+        $namespace = config('ddd.application').'\\'.ucfirst($domain).'\\Requests';
         $this->exportBackend($namespace, ucfirst($class), $this->getStubPath());
         $this->info("Form request created successfully.");
     }
 
-
     /**
      * Get stub path.
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getStubPath()
     {

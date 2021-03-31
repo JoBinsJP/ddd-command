@@ -1,15 +1,19 @@
 <?php
 
-namespace Aammui\DDD\Commands;
+namespace Jobins\DDDCommand\Commands;
 
-use Aammui\DDD\Traits\StubCompilerTrait;
 use Illuminate\Console\Command;
+use Jobins\DDDCommand\Traits\StubCompilerTrait;
 
+/**
+ * Class ModelMakeCommand
+ * @package Jobins\DDDCommand\Commands
+ */
 class ModelMakeCommand extends Command
 {
     use StubCompilerTrait;
 
-    const STUB_PATH = __DIR__ . '/../stubs/model.stub';
+    public const STUB_PATH = __DIR__.'/../stubs/model.stub';
 
     /**
      * The name and signature of the console command.
@@ -39,16 +43,16 @@ class ModelMakeCommand extends Command
     public function handle()
     {
         $controller = $this->argument('model');
-        $domain = $this->argument('d');
-        $namespace = config('ddd.domain') . '\\' . ucfirst($domain) . '\\Models';
+        $domain     = $this->argument('d');
+        $namespace  = config('ddd.domain').'\\'.ucfirst($domain).'\\Models';
         $this->exportBackend($namespace, ucfirst($controller), $this->getStubPath());
         $this->info("Model created successfully.");
     }
 
     /**
      * Get stub path.
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getStubPath()
     {

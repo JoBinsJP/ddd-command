@@ -1,13 +1,17 @@
 <?php
 
-namespace Aammui\DDD;
+namespace Jobins\DDDCommand;
 
-use Aammui\DDD\Commands\ControllerMakeCommand;
-use Aammui\DDD\Commands\FormRequestMakeCommand;
-use Aammui\DDD\Commands\ModelMakeCommand;
-use Aammui\DDD\Commands\TestMakeCommand;
 use Illuminate\Support\ServiceProvider;
+use Jobins\DDDCommand\Commands\ControllerMakeCommand;
+use Jobins\DDDCommand\Commands\FormRequestMakeCommand;
+use Jobins\DDDCommand\Commands\ModelMakeCommand;
+use Jobins\DDDCommand\Commands\TestMakeCommand;
 
+/**
+ * Class DDDServiceProvider
+ * @package Jobins\DDDCommand
+ */
 class DDDServiceProvider extends ServiceProvider
 {
     /**
@@ -18,7 +22,7 @@ class DDDServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/ddd.php',
+            __DIR__.'/../config/ddd.php',
             'ddd'
         );
     }
@@ -30,11 +34,13 @@ class DDDServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->commands([
-            ControllerMakeCommand::class,
-            FormRequestMakeCommand::class,
-            ModelMakeCommand::class,
-            TestMakeCommand::class
-        ]);
+        $this->commands(
+            [
+                ControllerMakeCommand::class,
+                FormRequestMakeCommand::class,
+                ModelMakeCommand::class,
+                TestMakeCommand::class,
+            ]
+        );
     }
 }

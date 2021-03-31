@@ -7,8 +7,6 @@
     <testsuites>
         <testsuite name="DDD Testsuite">
             <directory>tests</directory>
-            <exclude>./tests/Feature</exclude>
-            <exclude>./tests/Unit</exclude>
         </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">
