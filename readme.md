@@ -17,9 +17,9 @@ return [
 ];
 ```
 ### Installation
-This tools is supposed to require only in the development phase. So you can install it as development dependencies.
+This tool is supposed to require only in the development phase. So you can install it as development dependencies.
 ```
-composer require aammui/ddd --dev
+composer require jobins/ddd-command --dev
 ```
 ##### Create a Controller
 ```
