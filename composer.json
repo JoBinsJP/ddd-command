@@ -3,7 +3,8 @@
     "description": "Domain Driven Architecture Generator cli for Laravel.",
     "keywords": [
         "JoBins",
-        "Domain Driven Development (DDD)",
+        "Domain Driven Development",
+        "DDD",
         "Command",
         "Tools"
     ],
