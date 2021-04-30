@@ -39,12 +39,11 @@ class ModelMakeCommand extends Command
         parent::__construct();
     }
 
-
     public function handle()
     {
         $controller = $this->argument('model');
-        $domain     = $this->argument('d');
-        $namespace  = config('ddd.domain').'\\'.ucfirst($domain).'\\Models';
+        $domain = $this->argument('d');
+        $namespace = config('ddd.domain').'\\'.ucfirst($domain).'\\Models';
         $this->exportBackend($namespace, ucfirst($controller), $this->getStubPath());
         $this->info("Model created successfully.");
     }

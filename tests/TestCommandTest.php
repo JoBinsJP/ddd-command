@@ -30,7 +30,7 @@ class TestCommandTest extends BaseTestCase
     {
         Artisan::call('ddd:test LoginTest auth');
         $output = Artisan::output();
-        $file   = __DIR__.'/../tests/Feature/Auth/LoginTest.php';
+        $file = __DIR__.'/../tests/Feature/Auth/LoginTest.php';
         $this->assertTrue(file_exists($file));
     }
 
@@ -39,7 +39,7 @@ class TestCommandTest extends BaseTestCase
     {
         Artisan::call('ddd:test LoginTest auth --unit');
         $output = Artisan::output();
-        $file   = __DIR__.'/../tests/Unit/Auth/LoginTest.php';
+        $file = __DIR__.'/../tests/Unit/Auth/LoginTest.php';
         $this->assertTrue(file_exists($file));
     }
 }
