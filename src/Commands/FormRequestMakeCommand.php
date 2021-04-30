@@ -41,8 +41,8 @@ class FormRequestMakeCommand extends Command
 
     public function handle()
     {
-        $class     = $this->argument('request');
-        $domain    = $this->argument('d');
+        $class = $this->argument('request');
+        $domain = $this->argument('d');
         $namespace = config('ddd.application').'\\'.ucfirst($domain).'\\Requests';
         $this->exportBackend($namespace, ucfirst($class), $this->getStubPath());
         $this->info("Form request created successfully.");

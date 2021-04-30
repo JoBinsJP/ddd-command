@@ -13,7 +13,7 @@ class TestMakeCommand extends Command
 {
     use StubCompilerTrait;
 
-    public const STUB_PATH      = __DIR__.'/../stubs/test.stub';
+    public const STUB_PATH = __DIR__.'/../stubs/test.stub';
     public const STUB_UNIT_PATH = __DIR__.'/../stubs/test.unit.stub';
 
     /**
@@ -42,7 +42,7 @@ class TestMakeCommand extends Command
 
     public function handle()
     {
-        $class  = $this->argument('test');
+        $class = $this->argument('test');
         $domain = $this->argument('d');
         $isUnit = $this->option('unit');
         $this->exportBackend($this->getNamespace($domain, $isUnit), ucfirst($class), $this->getStubPath($isUnit));
@@ -59,7 +59,7 @@ class TestMakeCommand extends Command
      */
     public function getNamespace($domain, $isUnit)
     {
-        if ( $isUnit ) {
+        if ($isUnit) {
             return 'Tests\Unit'.'\\'.ucfirst($domain);
         }
 
@@ -75,7 +75,7 @@ class TestMakeCommand extends Command
      */
     public function getStubPath($isUnit = false)
     {
-        if ( $isUnit ) {
+        if ($isUnit) {
             return self::STUB_UNIT_PATH;
         }
 

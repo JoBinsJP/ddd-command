@@ -76,7 +76,7 @@ trait DomainCommand
      *
      * @return string
      */
-    protected function getDomainInput()
+    protected function getDomainInput(): string
     {
         return ucfirst(trim($this->argument('domain')));
     }

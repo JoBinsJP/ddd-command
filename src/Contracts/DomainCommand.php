@@ -8,5 +8,4 @@ namespace Jobins\DDDCommand\Contracts;
  */
 interface DomainCommand
 {
-
 }

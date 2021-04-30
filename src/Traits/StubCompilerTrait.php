@@ -11,9 +11,9 @@ trait StubCompilerTrait
     /**
      * @param string $file
      */
-    public function ensureFileExist($file)
+    public function ensureFileExist(string $file): void
     {
-        if ( !file_exists($file) ) {
+        if (! file_exists($file)) {
             $file = fopen($file, "w");
             fclose($file);
         }
@@ -28,7 +28,7 @@ trait StubCompilerTrait
      */
     protected function ensureDirectoriesExist($directory)
     {
-        if ( !is_dir($directory) ) {
+        if (! is_dir($directory)) {
             mkdir($directory, 0755, true);
         }
     }
@@ -45,7 +45,7 @@ trait StubCompilerTrait
     protected function exportBackend(string $namespace, string $class, string $stubPath)
     {
         $directory = lcfirst(str_replace('\\', '/', $namespace));
-        $file      = base_path("{$directory}/{$class}.php");
+        $file = base_path("{$directory}/{$class}.php");
         $this->ensureDirectoriesExist($directory);
         $this->ensureFileExist($file);
 

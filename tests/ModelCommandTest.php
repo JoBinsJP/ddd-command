@@ -29,7 +29,7 @@ class ModelCommandTest extends TestCase
     {
         Artisan::call('ddd:model Transaction Account');
         $output = Artisan::output();
-        $file   = __DIR__.'/../app/Domain/Account/Models/Transaction.php';
+        $file = __DIR__.'/../app/Domain/Account/Models/Transaction.php';
         $this->assertTrue(file_exists($file));
         require $file;
         $this->assertInstanceOf(Model::class, (new \App\Domain\Account\Models\Transaction()));

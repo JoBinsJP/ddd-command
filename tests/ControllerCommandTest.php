@@ -40,7 +40,7 @@ class ControllerCommandTest extends TestCase
     {
         Artisan::call('ddd:controller UserController auth -r');
         $output = Artisan::output();
-        $file   = __DIR__.'/../app/Application/Auth/Controllers/UserController.php';
+        $file = __DIR__.'/../app/Application/Auth/Controllers/UserController.php';
         $this->assertTrue(file_exists($file));
     }
 
@@ -49,7 +49,7 @@ class ControllerCommandTest extends TestCase
     {
         Artisan::call('ddd:controller UserController auth');
         $output = Artisan::output();
-        $file   = __DIR__.'/../app/Application/Auth/Controllers/UserController.php';
+        $file = __DIR__.'/../app/Application/Auth/Controllers/UserController.php';
         $this->assertTrue(file_exists($file));
     }
 }
