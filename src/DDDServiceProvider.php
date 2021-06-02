@@ -4,8 +4,8 @@ namespace Jobins\DDDCommand;
 
 use Illuminate\Support\ServiceProvider;
 use Jobins\DDDCommand\Commands\ControllerMakeCommand;
-use Jobins\DDDCommand\Commands\FormRequestMakeCommand;
 use Jobins\DDDCommand\Commands\ModelMakeCommand;
+use Jobins\DDDCommand\Commands\RequestMakeCommand;
 use Jobins\DDDCommand\Commands\TestMakeCommand;
 
 /**
@@ -37,10 +37,17 @@ class DDDServiceProvider extends ServiceProvider
         $this->commands(
             [
                 ControllerMakeCommand::class,
-                FormRequestMakeCommand::class,
+                RequestMakeCommand::class,
                 ModelMakeCommand::class,
                 TestMakeCommand::class,
             ]
+        );
+
+        $this->publishes(
+            [
+                __DIR__.'/../config/ddd.php' => config_path('ddd.php'),
+            ],
+            'config'
         );
     }
 }
