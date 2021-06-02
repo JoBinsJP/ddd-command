@@ -7,26 +7,11 @@ use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class DomainCommand
+ *
  * @package Jobins\DDDCommand
  */
 trait DomainCommand
 {
-    /**
-     * Build the class with the given name.
-     *
-     * Remove the base controller import if we are already in base namespace.
-     *
-     * @param string $name
-     *
-     * @return string
-     */
-    protected function buildClass($name)
-    {
-        $replace["use App\Http\Controllers\Controller;\n"] = sprintf("use %s;\n", config("ddd.controller_path"));
-
-        return str_replace(array_keys($replace), array_values($replace), parent::buildClass($name));
-    }
-
     /**
      * Get the console command arguments.
      *
@@ -37,21 +22,8 @@ trait DomainCommand
         return [
             ['name', InputArgument::REQUIRED, 'The name of the class'],
             ['domain', InputArgument::REQUIRED, 'The domain of the class'],
+            ["application", InputArgument::OPTIONAL, 'The application in http layer'],
         ];
-    }
-
-    /**
-     * Get the default namespace for the class.
-     *
-     * @param string $rootNamespace
-     *
-     * @return string
-     */
-    protected function getDefaultNamespace($rootNamespace)
-    {
-        $domain = $this->getDomainInput();
-
-        return config('ddd.application').'\\'.$domain.'\Controllers';
     }
 
     /**
@@ -79,5 +51,31 @@ trait DomainCommand
     protected function getDomainInput(): string
     {
         return ucfirst(trim($this->argument('domain')));
+    }
+
+    /**
+     * Get the desired class name from the input.
+     *
+     * @return string
+     */
+    protected function getApplicationInput(): string
+    {
+        $application = $this->argument('application');
+
+        if ($application == "" or is_null($application)) {
+            $application = config()->get("ddd.application");
+        }
+
+        return ucfirst(trim($application));
+    }
+
+    /**
+     * @return array|mixed
+     */
+    protected function getConfig()
+    {
+        $application = strtolower($this->getApplicationInput());
+
+        return config()->get("ddd.applications.{$application}");
     }
 }
